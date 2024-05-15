@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Libros</title>
+</head>
+<body>
+    <h1>Listado de Libros</h1>
+    <ul>
+        {% for libro in libros %}
+            <li>
+                {{ libro.titulo }} - {{ libro.autor.nombre }} - {{ libro.genero }} - {{ libro.año_publicacion }}
+                <form action="{% url 'actualizar_libro' libro.id %}" method="get" style="display: inline;">
+                    <button type="submit">Actualizar</button>
+                </form>
+                <form action="{% url 'eliminar_libro' libro.id %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Eliminar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'crear_libro' %}">Agregar Libro</a>
+</body>
+</html>
